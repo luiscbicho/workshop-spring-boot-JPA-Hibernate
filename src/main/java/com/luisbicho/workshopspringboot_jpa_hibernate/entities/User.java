@@ -1,15 +1,18 @@
 package com.luisbicho.workshopspringboot_jpa_hibernate.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeId;
+import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-
+@Entity
+@Table(name="tb_user")
 public class User implements Serializable {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String email;
