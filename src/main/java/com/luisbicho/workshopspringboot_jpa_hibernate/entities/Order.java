@@ -1,6 +1,7 @@
 package com.luisbicho.workshopspringboot_jpa_hibernate.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.luisbicho.workshopspringboot_jpa_hibernate.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Instant moment;
-
+    private Integer status;
 
 
     @ManyToOne
@@ -26,9 +27,10 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Integer id, Instant moment,User client) {
+    public Order(Integer id, Instant moment,OrderStatus status, User client) {
         this.id = id;
         this.moment = moment;
+        setStatus(status);
         this.client=client;
     }
 
@@ -46,6 +48,16 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        if(status != null){
+            this.status=status.getCode();
+        }
     }
 
     public User getClient() {

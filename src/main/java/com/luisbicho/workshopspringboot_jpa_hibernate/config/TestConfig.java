@@ -2,6 +2,7 @@ package com.luisbicho.workshopspringboot_jpa_hibernate.config;
 
 import com.luisbicho.workshopspringboot_jpa_hibernate.entities.Order;
 import com.luisbicho.workshopspringboot_jpa_hibernate.entities.User;
+import com.luisbicho.workshopspringboot_jpa_hibernate.entities.enums.OrderStatus;
 import com.luisbicho.workshopspringboot_jpa_hibernate.repositories.OrderRepository;
 import com.luisbicho.workshopspringboot_jpa_hibernate.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class TestConfig implements CommandLineRunner {
         User pedro = new User(null,"Pedro Bicho","pedro@gmail.com","92432424394","teste");
         User ines = new User(null,"Ines Fragoso","ines@gmail.com","924232294","teste");
 
-        Order o1 = new Order(null, Instant.now(),pedro);
-        Order o2 = new Order(null,Instant.now(),ines);
+        Order o1 = new Order(null, Instant.now(),OrderStatus.PAID,pedro);
+        Order o2 = new Order(null,Instant.now(),OrderStatus.WAITING_PAYMENT,ines);
 
         userRepository.saveAll(Arrays.asList(pedro,ines));
         orderRepository.saveAll(Arrays.asList(o1,o2));
