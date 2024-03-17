@@ -20,6 +20,8 @@ public class Order implements Serializable {
     private Instant moment;
     private Integer status;
 
+    @OneToOne(mappedBy="order",cascade = CascadeType.ALL)
+    private Payment payment;
 
     @ManyToOne
     @JoinColumn(name="client_id")
@@ -76,6 +78,14 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
